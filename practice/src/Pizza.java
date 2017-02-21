@@ -18,9 +18,7 @@ public class Pizza {
         height = pizza.length;
         width = pizza[0].length;
         cells = new int[pizza.length][pizza[0].length];
-        this.scores = initScores();
-
-        updateScores();
+		initScores();
     }
 
     public int[] getNextCell() {
@@ -61,23 +59,26 @@ public class Pizza {
 
 
 
-    public void updateScores() {}
+    public void updateScore(int i, int j) {
+    	int sumOfNeighbours = 0;
+		for(int k = -1; k < 2; k++){
+			for(int l = -1; l < 2; l++){
+				if(!(k == 0 && l == 0)){
+					sumOfNeighbours += getCellValue(i + k, j + l, pizza[i][j]);
+				}
+			}
+		}
+		scores[i][j] = sumOfNeighbours;
+	}
 
-    public int[][] initScores(){
+    public void initScores(){
 
-    	int[][] tempScores = new int[pizza.length][pizza[0].length];
+    	scores = new int[pizza.length][pizza[0].length];
         for (int i = 0; i < pizza.length; i++){
             for (int j = 0; j < pizza[0].length; j++){
-				for(int k = -1; k < 2; k++){
-					for(int l = -1; l < 2; l++){
-						if(!(k == 0 && l == 0)){
-							tempScores[i][j] += getCellValue(i + k, j + l, pizza[i][j]);
-						}
-					}
-				}
+				updateScore(i,j);
             }
         }
-        return  tempScores;
     }
 
     private int getCellValue(int i, int j, int defaultValue){
