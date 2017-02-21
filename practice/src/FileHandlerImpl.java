@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -8,7 +11,6 @@ import java.util.Scanner;
 public class FileHandlerImpl implements IFileHandler {
 
 	/**
-	 *
 	 * USAGE:
 	 *
 	 FileHandlerImpl fileHandler = new FileHandlerImpl();
@@ -21,6 +23,7 @@ public class FileHandlerImpl implements IFileHandler {
 	private static final String INPUT_FILE_NAME_2 = "medium.in";
 	private static final String INPUT_FILE_NAME_3 = "big.in";
 	private static String chosenInputFile = "small.in";
+	private static String chosenOutPutFile = "small.out";
 
 	private int L;
 	private int H;
@@ -32,16 +35,19 @@ public class FileHandlerImpl implements IFileHandler {
 		}
 		if (i == 1) {
 			chosenInputFile = INPUT_FILE_NAME_1;
+			chosenOutPutFile = "small.out";
 		} else if (i == 2) {
 			chosenInputFile = INPUT_FILE_NAME_2;
+			chosenOutPutFile = "medium.out";
 		} else if (i == 3) {
 			chosenInputFile = INPUT_FILE_NAME_3;
+			chosenOutPutFile = "medium.out";
 		}
 	}
 
 	@Override
 	public int[][] readMap() {
-		File file = new File (new File("practice/resource/" + chosenInputFile).getAbsolutePath());
+		File file = new File(new File("practice/resource/" + chosenInputFile).getAbsolutePath());
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(file);
@@ -84,9 +90,22 @@ public class FileHandlerImpl implements IFileHandler {
 	}
 
 	@Override
-	public void printSolutionToFile(int[][] i) throws IndexOutOfBoundsException {
-		if (i[0].length != 4) {
+	public void printSolutionToFile(int[][] solution) throws IndexOutOfBoundsException {
+		if (solution[0].length != 4) {
 			throw new IndexOutOfBoundsException();
+		}
+		StringBuilder stringBuilder = new StringBuilder();
+		System.out.println(solution.length);
+		for (int i = 0; i < solution.length; i++) {
+			for (int j = 0; j < solution.length - 1; j++) {
+				stringBuilder.append(solution[i][j] + " ");
+			}
+			stringBuilder.append(solution[i][solution.length - 1] + "\n");
+		}
+		try {
+			Files.write(Paths.get("./" + chosenOutPutFile), stringBuilder.toString().getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
