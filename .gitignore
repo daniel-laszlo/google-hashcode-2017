@@ -25,3 +25,6 @@ buildNumber.properties
 .mvn/timing.properties
 .idea/
 *.pdf
+*.xml
+*.html
+*.properties
