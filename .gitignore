@@ -28,3 +28,4 @@ buildNumber.properties
 *.xml
 *.html
 *.properties
+*.zip
