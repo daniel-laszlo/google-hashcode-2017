@@ -7,7 +7,7 @@ public interface IFileHandler {
 
 	public int[][] readMap();
 
-	public void printSolutionToFile(int[][] i) throws IndexOutOfBoundsException;
+	public void printSolutionToFile(int[][] solution) throws IndexOutOfBoundsException;
 
 	public int getL();
 
