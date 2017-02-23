@@ -12,6 +12,7 @@ public class Main {
 		model.run();
 
         CacheServer[] cacheServers = Model.cacheServers;
+        fileHandler.printSolutionToFile();
 		System.out.println("ok");
 	}
 }
