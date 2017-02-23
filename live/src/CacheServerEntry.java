@@ -10,6 +10,7 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 	private int requestNumberSum;
 	private List<Integer> requestIds;
 	private int priority = 0;
+	private int weight = 1;
 	
 	public CacheServerEntry() {
 		requestIds = new ArrayList<>();
@@ -48,7 +49,7 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 	}
 	
 	public void updatePriority() {
-		priority = requestNumberSum / Model.videoSizes[videoId];
+		priority = requestNumberSum / (weight * Model.videoSizes[videoId]); 
 	}
 
 	@Override
