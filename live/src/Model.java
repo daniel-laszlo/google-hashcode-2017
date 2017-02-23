@@ -14,7 +14,7 @@ public class Model {
 		videoSizes = videoSizes1;
 		endpoints = endpoints1;
 		cacheServers = cacheServers1;
-		
+
 	}
 
 }

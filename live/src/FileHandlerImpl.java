@@ -49,6 +49,53 @@ public class FileHandlerImpl implements IFileHandler {
 		}
 	}
 
+	public void initModel() {
+		File file = new File(new File("live/resource/" + chosenInputFile).getAbsolutePath());
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		String[] params = scanner.nextLine().split(" ");
+		int[] intParams = new int[5];
+		for (int i1 = 0; i1 < intParams.length; i1++) {
+			intParams[i1] = Integer.parseInt(params[i1]);
+		}
+
+		int V = intParams[0];
+		int E = intParams[1];
+		int R = intParams[2];
+		int C = intParams[3];
+		int X = intParams[4];
+
+		Request[] requests = new Request[R];
+		int[] videoSizes = new int[V];
+		Endpoint[] endpoints = new Endpoint[E];
+		CacheServer[] cacheServers = new CacheServer[C];
+
+		String[] videoSizesArray = scanner.nextLine().split(" ");
+		for (int i1 = 0; i1 < videoSizes.length; i1++) {
+			videoSizes[i1] = Integer.parseInt(videoSizesArray[i1]);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//Model model = new Model();
+	}
+
 	@Override
 	public int[][] readMap() {
 		File file = new File(new File("practice/resource/" + chosenInputFile).getAbsolutePath());
