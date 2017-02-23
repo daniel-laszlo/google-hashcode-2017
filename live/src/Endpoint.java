@@ -8,6 +8,7 @@ public class Endpoint {
 
 	private List<Integer> cacheServerIds;
 	private List<Integer> timeToReachCacheServers;
+	private int latencyToDataCenter;
 
 	public Endpoint() {
 		this.cacheServerIds = new ArrayList<>();
@@ -28,5 +29,13 @@ public class Endpoint {
 
 	public void setTimeToReachCacheServers(List<Integer> timeToReachCacheServers) {
 		this.timeToReachCacheServers = timeToReachCacheServers;
+	}
+
+	public int getLatencyToDataCenter() {
+		return latencyToDataCenter;
+	}
+
+	public void setLatencyToDataCenter(int latencyToDataCenter) {
+		this.latencyToDataCenter = latencyToDataCenter;
 	}
 }
