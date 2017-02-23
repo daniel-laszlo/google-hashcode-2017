@@ -66,6 +66,7 @@ public class CacheServer {
 		if(best.getRequestNumberSum() == 0) {
 			return new Integer[0];
 		} else {
+            videoIds.add(best.getVideoId());
 			best.setRequestNumberSum(0);
 			return best.getRequestIds().toArray(new Integer[best.getRequestIds().size()]);
 		} 
