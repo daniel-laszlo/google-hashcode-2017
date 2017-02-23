@@ -44,7 +44,7 @@ public class FileHandlerImpl implements IFileHandler {
 	}
 
 	public void initModel() {
-		File file = new File(new File("live/resource/" + chosenInputFile).getAbsolutePath());
+		File file = new File(new File("../resource/" + chosenInputFile).getAbsolutePath());
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(file);

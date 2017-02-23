@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Daniel on 2017. 02. 23..
@@ -10,12 +8,12 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 
 	private int videoId;
 	private int requestNumberSum;
-	private Set<Integer> requestIds;
+	private List<Integer> requestIds;
 	private int priority = 0;
 	private int weight = 1;
 	
 	public CacheServerEntry() {
-		requestIds = new HashSet<>();
+		requestIds = new ArrayList<>();
 	}
 
 	public int getVideoId() {
@@ -35,7 +33,11 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 	}
 
 	public List<Integer> getRequestIds() {
-		return new ArrayList<>(requestIds);
+		return requestIds;
+	}
+
+	public void setRequestIds(List<Integer> requestIds) {
+		this.requestIds = requestIds;
 	}
 
 	public void addRequestId(Integer id) {
@@ -59,9 +61,5 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 		} else {
 			return 0;
 		}
-	}
-
-    public void removeRequestId(int requestId) {
-        requestIds.remove(requestId);
-    }
+	} 
 }
