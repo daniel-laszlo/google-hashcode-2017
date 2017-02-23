@@ -15,6 +15,10 @@ public class Model {
 		endpoints = endpoints1;
 		cacheServers = cacheServers1;
 
+
 	}
 
+    public void init() {
+
+    }
 }

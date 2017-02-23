@@ -5,6 +5,7 @@
 // Request objektum minden requestre
 public class Request {
 
+	private int requestId;
 	private int videoId;
 	private int endPointId;
 	private int requestDarab; // 1 endpoint - 1 videora
@@ -32,4 +33,12 @@ public class Request {
 	public void setRequestDarab(int requestDarab) {
 		this.requestDarab = requestDarab;
 	}
+
+    public int getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
+    }
 }
