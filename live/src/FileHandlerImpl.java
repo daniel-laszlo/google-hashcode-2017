@@ -106,6 +106,7 @@ public class FileHandlerImpl implements IFileHandler {
 			cacheServer.setSize(X);
 
 			cacheServers[c] = cacheServer;
+			
 		}
 
 		Model model = new Model(requests, videoSizes, endpoints, cacheServers);
