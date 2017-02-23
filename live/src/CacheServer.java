@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -52,7 +53,9 @@ public class CacheServer {
 	// sorba teszi a cache tömböt. Amelyik a legjobb annak az R.idjét adja vissza
 	// üres tömb ha már nem bírt kivenni
 	public int[] pop() {
-
+		Arrays.sort(cacheServerEntries);
+		int[] toRemove = new int[10];
+		return toRemove;
 	}
 
 	//MIKE

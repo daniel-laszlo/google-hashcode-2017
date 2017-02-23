@@ -19,9 +19,10 @@ public class FileHandlerImpl implements IFileHandler {
 	 int i = map[0][0];
 	 */
 
-	private static final String INPUT_FILE_NAME_1 = "small.in";
-	private static final String INPUT_FILE_NAME_2 = "medium.in";
-	private static final String INPUT_FILE_NAME_3 = "big.in";
+	private static final String INPUT_FILE_NAME_1 = "kittens.in";
+	private static final String INPUT_FILE_NAME_2 = "me_at_the_zoo.in";
+	private static final String INPUT_FILE_NAME_3 = "trending_today.in";
+	private static final String INPUT_FILE_NAME_4 = "videos_worth_spreading.in";
 	private static String chosenInputFile = "small.in";
 	private static String chosenOutPutFile = "small.out";
 
@@ -30,19 +31,70 @@ public class FileHandlerImpl implements IFileHandler {
 
 	@Override
 	public void setFile(int i) {
-		if (i > 3 || i < 0) {
+		if (i > 4 || i < 0) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (i == 1) {
 			chosenInputFile = INPUT_FILE_NAME_1;
-			chosenOutPutFile = "small.out";
+			chosenOutPutFile = "kittens.out";
 		} else if (i == 2) {
 			chosenInputFile = INPUT_FILE_NAME_2;
-			chosenOutPutFile = "medium.out";
+			chosenOutPutFile = "me_at_the_zoo.out";
 		} else if (i == 3) {
 			chosenInputFile = INPUT_FILE_NAME_3;
-			chosenOutPutFile = "medium.out";
+			chosenOutPutFile = "trending_today.out";
+		} else if (i == 4) {
+			chosenInputFile = INPUT_FILE_NAME_4;
+			chosenOutPutFile = "videos_worth_spreading.out";
 		}
+	}
+
+	public void initModel() {
+		File file = new File(new File("live/resource/" + chosenInputFile).getAbsolutePath());
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		String[] params = scanner.nextLine().split(" ");
+		int[] intParams = new int[5];
+		for (int i1 = 0; i1 < intParams.length; i1++) {
+			intParams[i1] = Integer.parseInt(params[i1]);
+		}
+
+		int V = intParams[0];
+		int E = intParams[1];
+		int R = intParams[2];
+		int C = intParams[3];
+		int X = intParams[4];
+
+		Request[] requests = new Request[R];
+		int[] videoSizes = new int[V];
+		Endpoint[] endpoints = new Endpoint[E];
+		CacheServer[] cacheServers = new CacheServer[C];
+
+		String[] videoSizesArray = scanner.nextLine().split(" ");
+		for (int i1 = 0; i1 < videoSizes.length; i1++) {
+			videoSizes[i1] = Integer.parseInt(videoSizesArray[i1]);
+		}
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+		//Model model = new Model();
 	}
 
 	@Override
