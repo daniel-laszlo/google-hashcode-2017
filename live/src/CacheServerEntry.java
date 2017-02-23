@@ -40,6 +40,10 @@ public class CacheServerEntry {
 		this.requestIds = requestIds;
 	}
 
+	public void addRequestId(Integer id) {
+        requestIds.add(id);
+    }
+
 	public int getMax() {
 		return maxSize;
 	}
