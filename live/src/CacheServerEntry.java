@@ -10,6 +10,7 @@ public class CacheServerEntry {
 	private int requestNumberSum;
 	private List<Integer> requestIds;
 	private int maxSize;
+	private int priority;
 
 	public CacheServerEntry() {
 		requestIds = new ArrayList<>();
