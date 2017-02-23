@@ -42,6 +42,7 @@ public class Model {
             availableCacheServers.add(i);
         }
         while (!availableCacheServers.isEmpty()) {
+            List<Integer> oldIds = new ArrayList<Integer>();
             for (int csId: availableCacheServers) {
                 Integer[] requestIds = cacheServers[csId].pop();
                 for (int i : requestIds) {
@@ -50,8 +51,11 @@ public class Model {
                     }
                 }
                 if (requestIds.length == 0) {
-                    availableCacheServers.remove(csId);
+                    oldIds.add(csId);
                 }
+            }
+            for (Integer id: oldIds) {
+                availableCacheServers.remove(id);
             }
         }
     }

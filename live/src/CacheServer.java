@@ -14,7 +14,10 @@ public class CacheServer {
 	public CacheServer() {
 		videoIds = new ArrayList<>();
 		cacheServerEntries = new CacheServerEntry[Model.videoSizes.length];
-	}
+        for (int i = 0; i < cacheServerEntries.length; i++) {
+            cacheServerEntries[i] = new CacheServerEntry();
+        }
+    }
 
 	public int getSize() {
 		return size;
