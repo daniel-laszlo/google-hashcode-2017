@@ -51,7 +51,7 @@ public class CacheServer {
 	// MARK
 	// sorba teszi a cache tömböt. Amelyik a legjobb annak az R.idjét adja vissza
 	// üres tömb ha már nem bírt kivenni
-	public Request[] pop() {
+	public int[] pop() {
 
 	}
 
