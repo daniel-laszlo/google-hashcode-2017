@@ -101,6 +101,7 @@ public class FileHandlerImpl implements IFileHandler {
 			request.setRequestId(requestId++);
 			request.setEndPointId(Integer.parseInt(params[1]));
 			request.setRequestDarab(Integer.parseInt(params[2]));
+			request.setVideoId(Integer.parseInt(params[0]));
 			requests[r] = request;
 		}
 
