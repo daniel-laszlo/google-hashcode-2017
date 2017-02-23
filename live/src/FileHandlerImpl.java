@@ -106,7 +106,6 @@ public class FileHandlerImpl implements IFileHandler {
 			cacheServer.setSize(X);
 
 			cacheServers[c] = cacheServer;
-
 		}
 
 		Model.cacheServers = cacheServers;
