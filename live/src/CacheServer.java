@@ -81,7 +81,7 @@ public class CacheServer {
 	
 	public void updateAll() {
 		for(int i = 0; i < cacheServerEntries.length; ++i) {
-			cacheServerEntries[i].updatePriority();
+			cacheServerEntries[i].updatePriority(); 
 		}
 	}
 }
