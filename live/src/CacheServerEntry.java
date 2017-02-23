@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Created by Daniel on 2017. 02. 23..
  */
-public class CacheServerEntry {
+public class CacheServerEntry implements Comparable<CacheServerEntry> {
 
 	private int videoId;
 	private int requestNumberSum;
@@ -48,7 +48,22 @@ public class CacheServerEntry {
 		this.maxSize = max;
 	}
 	
+	public int getPriority() {
+		return priority;
+	}
+	
 	public void updatePriority() {
 		priority = requestNumberSum / Model.videoSizes[videoId];
+	}
+
+	@Override
+	public int compareTo(CacheServerEntry other) {
+		if(priority < other.getPriority()) {
+			return 1;
+		} else if(priority > other.getPriority()){
+			return -1;
+		} else {
+			return 0;
+		}
 	}
 }

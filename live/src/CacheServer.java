@@ -54,8 +54,14 @@ public class CacheServer {
 	// üres tömb ha már nem bírt kivenni
 	public int[] pop() {
 		Arrays.sort(cacheServerEntries);
-		int[] toRemove = new int[10];
-		return toRemove;
+		CacheServerEntry best = cacheServerEntries[0];
+		if(best.getRequestNumberSum() == 0) {
+			return new int[0];
+		} else {
+			best.setRequestNumberSum(0);
+			return new int[0];
+			
+		}
 	}
 
 	//MIKE
