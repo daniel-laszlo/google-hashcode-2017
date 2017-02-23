@@ -80,4 +80,10 @@ public class CacheServer {
 				cacheServerEntries[videoId].getRequestIds().indexOf(request.getRequestId()));
 		cacheServerEntries[videoId].updatePriority();
 	}
+	
+	public void updateAll() {
+		for(int i = 0; i < cacheServerEntries.length; ++i) {
+			cacheServerEntries[i].updatePriority();
+		}
+	}
 }

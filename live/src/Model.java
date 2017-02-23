@@ -30,7 +30,7 @@ public class Model {
             }
         }
         for (CacheServer cacheServer : cacheServers) {
-            cacheServer.updateAl();
+            cacheServer.updateAll();
         }
     }
 
