@@ -114,8 +114,6 @@ public class FileHandlerImpl implements IFileHandler {
 	}
 
 	public void printSolutionToFile() throws IndexOutOfBoundsException {
-
-
 		if (Model.getActiveCacheServers().size() > Model.cacheServers.length) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -126,7 +124,7 @@ public class FileHandlerImpl implements IFileHandler {
 			CacheServer cacheServerToBePrinted = Model.cacheServers[activeServerIds.get(i)];
 			stringBuilder.append(activeServerIds.get(i) + " ");
 			for (int j = 0; j < cacheServerToBePrinted.getVideoIds().size() - 1; j++) {
-				 stringBuilder.append(cacheServerToBePrinted.getVideoIds().get(j) + " ");
+				stringBuilder.append(cacheServerToBePrinted.getVideoIds().get(j) + " ");
 			}
 			stringBuilder.append(cacheServerToBePrinted.getVideoIds().get(cacheServerToBePrinted.getVideoIds().size() - 1) + "\n");
 		}
