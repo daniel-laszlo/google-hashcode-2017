@@ -67,7 +67,7 @@ public class CacheServer {
 		} else {
 			best.setRequestNumberSum(0);
 			return best.getRequestIds().toArray(new Integer[best.getRequestIds().size()]);
-		}
+		} 
 	}
 
 	//MIKE

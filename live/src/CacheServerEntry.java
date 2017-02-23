@@ -65,5 +65,5 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 		} else {
 			return 0;
 		}
-	}
+	} 
 }
