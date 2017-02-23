@@ -52,15 +52,14 @@ public class CacheServer {
 	// MARK
 	// sorba teszi a cache tömböt. Amelyik a legjobb annak az R.idjét adja vissza
 	// üres tömb ha már nem bírt kivenni
-	public int[] pop() {
+	public Integer[] pop() {
 		Arrays.sort(cacheServerEntries);
 		CacheServerEntry best = cacheServerEntries[0];
 		if(best.getRequestNumberSum() == 0) {
-			return new int[0];
+			return new Integer[0];
 		} else {
 			best.setRequestNumberSum(0);
-			return new int[0];
-			
+			return best.getRequestIds().toArray(new Integer[best.getRequestIds().size()]);
 		}
 	}
 
