@@ -14,7 +14,10 @@ public class CacheServer {
 	public CacheServer() {
 		videoIds = new ArrayList<>();
 		cacheServerEntries = new CacheServerEntry[Model.videoSizes.length];
-	}
+        for (int i = 0; i < cacheServerEntries.length; i++) {
+            cacheServerEntries[i] = new CacheServerEntry();
+        }
+    }
 
 	public int getSize() {
 		return size;
@@ -63,6 +66,7 @@ public class CacheServer {
 		if(best.getRequestNumberSum() == 0) {
 			return new Integer[0];
 		} else {
+            videoIds.add(best.getVideoId());
 			best.setRequestNumberSum(0);
 			return best.getRequestIds().toArray(new Integer[best.getRequestIds().size()]);
 		} 

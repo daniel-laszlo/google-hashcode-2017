@@ -10,5 +10,8 @@ public class Main {
 		Model model = new Model();
 		model.init();
 		model.run();
+
+        CacheServer[] cacheServers = Model.cacheServers;
+		System.out.println("ok");
 	}
 }
