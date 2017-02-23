@@ -10,8 +10,8 @@ public class CacheServerEntry {
 	private int requestNumberSum;
 	private List<Integer> requestIds;
 	private int maxSize;
-	private int priority;
-
+	private int priority = 0;
+	
 	public CacheServerEntry() {
 		requestIds = new ArrayList<>();
 	}
@@ -46,5 +46,9 @@ public class CacheServerEntry {
 
 	public void setMax(int max) {
 		this.maxSize = max;
+	}
+	
+	public void updatePriority() {
+		priority = requestNumberSum/Model.videoSizes[videoId];
 	}
 }
