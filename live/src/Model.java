@@ -25,7 +25,17 @@ public class Model {
 
 	}
 
-    public void init() {
+	public static List<Integer> getActiveCacheServers(){
+    	List<Integer> activeCacheServers = new ArrayList<>();
+    	for(int i = 0; i < cacheServers.length; i++){
+    		if(!cacheServers[i].getVideoIds().isEmpty()){
+    			activeCacheServers.add(i);
+			}
+		}
+		return activeCacheServers;
+	}
+
+	public void init() {
         for (int i = 0; i < requests.length; i++) {
             for (int cacheServerId = 0; cacheServerId < endpoints[requests[i].getEndPointId()].getCacheServerIds().size(); cacheServerId++) {
                 cacheServers[cacheServerId].put(requests[i]);
