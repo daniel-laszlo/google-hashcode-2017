@@ -9,6 +9,6 @@ public class Model {
 	public CacheServer[] cacheServerEntries;
 
 	public Model() {
-		
+
 	}
 }
