@@ -54,6 +54,8 @@ public class CacheServer {
 	// üres tömb ha már nem bírt kivenni
 	public int[] pop() {
 		Arrays.sort(cacheServerEntries);
+		int[] toRemove = new int[10];
+		return toRemove;
 	}
 
 	//MIKE

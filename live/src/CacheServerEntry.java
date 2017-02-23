@@ -49,6 +49,6 @@ public class CacheServerEntry {
 	}
 	
 	public void updatePriority() {
-		priority = requestNumberSum/Model.videoSizes[videoId];
+		priority = requestNumberSum / Model.videoSizes[videoId];
 	}
 }
