@@ -5,6 +5,4 @@ public interface IFileHandler {
 
 	public void setFile(int i);
 
-	public void printSolutionToFile(int[][] solution) throws IndexOutOfBoundsException;
-
 }
