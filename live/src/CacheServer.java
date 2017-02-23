@@ -62,14 +62,24 @@ public class CacheServer {
 	// üres tömb ha már nem bírt kivenni
 	public Integer[] pop() {
 		Arrays.sort(cacheServerEntries);
-		CacheServerEntry best = cacheServerEntries[0];
-		if(best.getRequestNumberSum() == 0) {
-			return new Integer[0];
-		} else {
-            videoIds.add(best.getVideoId());
-			best.setRequestNumberSum(0);
-			return best.getRequestIds().toArray(new Integer[best.getRequestIds().size()]);
-		} 
+		for(CacheServerEntry c:cacheServerEntries){
+			if(c.getRequestNumberSum() == 0) {
+				return new Integer[0];
+			} else {
+				int leftSize = size;
+				for(int v:videoIds) {
+					leftSize = leftSize-Model.videoSizes[v];
+				}
+				if(leftSize<Model.videoSizes[c.getVideoId()]) {
+					c.setRequestNumberSum(0);
+				} else {
+		            videoIds.add(c.getVideoId());
+					c.setRequestNumberSum(0);
+					return c.getRequestIds().toArray(new Integer[c.getRequestIds().size()]);
+				}	 
+			} 
+		}
+		return new Integer[0];
 	}
 
 	//MIKE
