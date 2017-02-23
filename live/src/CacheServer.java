@@ -53,6 +53,7 @@ public class CacheServer {
 		cacheServerEntries[videoId].setRequestNumberSum(
 				cacheServerEntries[videoId].getRequestNumberSum() + request.getRequestDarab());
 		cacheServerEntries[videoId].getRequestIds().add(request.getRequestId());
+		cacheServerEntries[videoId].updatePriority();
 	}
 
 	// MARK
