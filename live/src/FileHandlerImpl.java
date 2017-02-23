@@ -16,12 +16,13 @@ public class FileHandlerImpl implements IFileHandler {
 	private static final String INPUT_FILE_NAME_2 = "me_at_the_zoo.in";
 	private static final String INPUT_FILE_NAME_3 = "trending_today.in";
 	private static final String INPUT_FILE_NAME_4 = "videos_worth_spreading.in";
-	private static String chosenInputFile = "kittens.in";
-	private static String chosenOutPutFile = "kittens.out";
+	private static final String INPUT_FILE_NAME_5 = "proba.in";
+	private static String chosenInputFile = "proba.in";
+	private static String chosenOutPutFile = "proba.out";
 
 	@Override
 	public void setFile(int i) {
-		if (i > 4 || i < 0) {
+		if (i > 5 || i < 0) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (i == 1) {
@@ -36,6 +37,9 @@ public class FileHandlerImpl implements IFileHandler {
 		} else if (i == 4) {
 			chosenInputFile = INPUT_FILE_NAME_4;
 			chosenOutPutFile = "videos_worth_spreading.out";
+		} else if (i == 5) {
+			chosenInputFile = INPUT_FILE_NAME_5;
+			chosenOutPutFile = "proba.out";
 		}
 	}
 
