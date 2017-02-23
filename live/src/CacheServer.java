@@ -88,8 +88,7 @@ public class CacheServer {
 		int videoId = request.getVideoId();
 		cacheServerEntries[videoId].setRequestNumberSum(
 				cacheServerEntries[videoId].getRequestNumberSum() - request.getRequestDarab());
-		cacheServerEntries[videoId].getRequestIds().remove(
-				cacheServerEntries[videoId].getRequestIds().indexOf(request.getRequestId()));
+		cacheServerEntries[videoId].removeRequestId(request.getRequestId());
 		cacheServerEntries[videoId].updatePriority();
 	}
 	
