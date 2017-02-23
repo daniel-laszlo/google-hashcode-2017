@@ -13,6 +13,7 @@ public class CacheServer {
 
 	public CacheServer() {
 		videoIds = new ArrayList<>();
+		cacheServerEntries = new CacheServerEntry[Model.videoSizes.length];
 	}
 
 	public int getSize() {
@@ -46,7 +47,13 @@ public class CacheServer {
 	// MIKE
 	// Végigmegy a request tömbön, csak a legelején
 	public void put(Request request) {
-
+		int videoId = request.getVideoId();
+		cacheServerEntries[videoId].setVideoId(videoId);
+		cacheServerEntries[videoId] = new CacheServerEntry();
+		cacheServerEntries[videoId].setRequestNumberSum(
+				cacheServerEntries[videoId].getRequestNumberSum() + request.getRequestDarab());
+		cacheServerEntries[videoId].getRequestIds().add(request.getRequestId());
+		cacheServerEntries[videoId].updatePriority();
 	}
 
 	// MARK
@@ -66,6 +73,11 @@ public class CacheServer {
 	//MIKE
 	// request számát kiveszi és törli a megfelelő elemet a tömbből
 	public void remove(Request request) {
-
+		int videoId = request.getVideoId();
+		cacheServerEntries[videoId].setRequestNumberSum(
+				cacheServerEntries[videoId].getRequestNumberSum() - request.getRequestDarab());
+		cacheServerEntries[videoId].getRequestIds().remove(
+				cacheServerEntries[videoId].getRequestIds().indexOf(request.getRequestId()));
+		cacheServerEntries[videoId].updatePriority();
 	}
 }
