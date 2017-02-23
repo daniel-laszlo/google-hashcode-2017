@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,9 +18,6 @@ public class FileHandlerImpl implements IFileHandler {
 	private static final String INPUT_FILE_NAME_4 = "videos_worth_spreading.in";
 	private static String chosenInputFile = "kittens.in";
 	private static String chosenOutPutFile = "kittens.out";
-
-	private int L;
-	private int H;
 
 	@Override
 	public void setFile(int i) {
@@ -115,18 +113,20 @@ public class FileHandlerImpl implements IFileHandler {
 		Model.endpoints = endpoints;
 	}
 
-	@Override
-	public void printSolutionToFile(int[][] solution) throws IndexOutOfBoundsException {
-		if (solution[0].length != 4) {
+	public void printSolutionToFile() throws IndexOutOfBoundsException {
+		if (Model.getActiveCacheServers().size() > Model.cacheServers.length) {
 			throw new IndexOutOfBoundsException();
 		}
+
+		List<Integer> activeServerIds = Model.getActiveCacheServers();
 		StringBuilder stringBuilder = new StringBuilder();
-		System.out.println(solution.length);
-		for (int i = 0; i < solution.length; i++) {
-			for (int j = 0; j < solution.length - 1; j++) {
-				stringBuilder.append(solution[i][j] + " ");
+		for (int i = 0; i < activeServerIds.size(); i++) {
+			CacheServer cacheServerToBePrinted = Model.cacheServers[activeServerIds.get(i)];
+			stringBuilder.append(activeServerIds.get(i) + " ");
+			for (int j = 0; j < cacheServerToBePrinted.getVideoIds().size() - 1; j++) {
+				stringBuilder.append(cacheServerToBePrinted.getVideoIds().get(j) + " ");
 			}
-			stringBuilder.append(solution[i][solution.length - 1] + "\n");
+			stringBuilder.append(cacheServerToBePrinted.getVideoIds().get(cacheServerToBePrinted.getVideoIds().size() - 1) + "\n");
 		}
 		try {
 			Files.write(Paths.get("./" + chosenOutPutFile), stringBuilder.toString().getBytes());
