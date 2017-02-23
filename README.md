@@ -27,6 +27,7 @@ waiting time for all requests.
 
 1 0 1000
 
+### Meaning
 5 videos, 2 endpoints, 4 request descriptions, 3 caches 100MB each.
 
 Videos 0, 1, 2, 3, 4 have sizes 50MB, 50MB, 80MB, 30MB, 110MB.
