@@ -9,7 +9,6 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 	private int videoId;
 	private int requestNumberSum;
 	private List<Integer> requestIds;
-	private int maxSize;
 	private int priority = 0;
 	
 	public CacheServerEntry() {
@@ -40,13 +39,9 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 		this.requestIds = requestIds;
 	}
 
-	public int getMax() {
-		return maxSize;
-	}
-
-	public void setMax(int max) {
-		this.maxSize = max;
-	}
+	public void addRequestId(Integer id) {
+        requestIds.add(id);
+    }
 	
 	public int getPriority() {
 		return priority;

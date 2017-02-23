@@ -49,11 +49,9 @@ public class CacheServer {
 	public void put(Request request) {
 		int videoId = request.getVideoId();
 		cacheServerEntries[videoId].setVideoId(videoId);
-		cacheServerEntries[videoId] = new CacheServerEntry();
 		cacheServerEntries[videoId].setRequestNumberSum(
 				cacheServerEntries[videoId].getRequestNumberSum() + request.getRequestDarab());
-		cacheServerEntries[videoId].getRequestIds().add(request.getRequestId());
-		cacheServerEntries[videoId].updatePriority();
+		cacheServerEntries[videoId].addRequestId(request.getRequestId());
 	}
 
 	// MARK
