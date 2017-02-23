@@ -126,7 +126,7 @@ public class FileHandlerImpl implements IFileHandler {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < activeServerIds.size(); i++) {
 			CacheServer cacheServerToBePrinted = Model.cacheServers[activeServerIds.get(i)];
-			stringBuilder.append(activeServerIds.get(i) + " ");
+			stringBuilder.append(activeServerIds.get(i) + "\n");
 			for (int j = 0; j < cacheServerToBePrinted.getVideoIds().size() - 1; j++) {
 				stringBuilder.append(cacheServerToBePrinted.getVideoIds().get(j) + " ");
 			}
