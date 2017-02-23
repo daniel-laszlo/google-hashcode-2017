@@ -88,6 +88,8 @@ public class FileHandlerImpl implements IFileHandler {
 			endpoints[e] = endpoint;
 		}
 
+		Model.videoSizes = videoSizes;
+
 		// Request description
 		int requestId = 0;
 		for (int r = 0; r < R; ++r) {
@@ -110,7 +112,6 @@ public class FileHandlerImpl implements IFileHandler {
 
 		Model.cacheServers = cacheServers;
 		Model.requests = requests;
-		Model.videoSizes = videoSizes;
 		Model.endpoints = endpoints;
 	}
 
