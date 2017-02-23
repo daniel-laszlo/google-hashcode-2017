@@ -56,7 +56,7 @@ public class Model {
             for (int csId: availableCacheServers) {
                 Integer[] requestIds = cacheServers[csId].pop();
                 for (int i : requestIds) {
-                    for (int cacheServerId = 0; cacheServerId < endpoints[requests[i].getEndPointId()].getCacheServerIds().size(); cacheServerId++) {
+                    for (int cacheServerId : endpoints[requests[i].getEndPointId()].getCacheServerIds()) {
                         cacheServers[cacheServerId].remove(requests[i]);
                     }
                 }
