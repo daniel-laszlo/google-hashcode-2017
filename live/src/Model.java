@@ -8,6 +8,7 @@ public class Model {
 	public Endpoint[] endpoints;
 	public CacheServer[] cacheServerEntries;
 
+
 	public Model() {
 
 	}

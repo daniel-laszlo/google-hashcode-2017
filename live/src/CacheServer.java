@@ -37,4 +37,27 @@ public class CacheServer {
 	public void setVideoIds(List<Integer> videoIds) {
 		this.videoIds = videoIds;
 	}
+
+	//
+	// FUNCTIONS
+	//
+
+	// MIKE
+	// Végigmegy a request tömbön, csak a legelején
+	public void put(Request request) {
+
+	}
+
+	// MARK
+	// sorba teszi a cache tömböt. Amelyik a legjobb annak az R.idjét adja vissza
+	// üres tömb ha már nem bírt kivenni
+	public Request[] pop() {
+
+	}
+
+	//MIKE
+	// request számát kiveszi és törli a megfelelő elemet a tömbből
+	public void remove(Request request) {
+
+	}
 }
