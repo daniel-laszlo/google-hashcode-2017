@@ -14,6 +14,8 @@ public class Model {
 	public static CacheServer[] cacheServers;
 
 
+    public Model() {}
+
 	public Model(Request[] requests1, int[] videoSizes1, Endpoint[] endpoints1, CacheServer[] cacheServers1) {
 		requests = requests1;
 		videoSizes = videoSizes1;
