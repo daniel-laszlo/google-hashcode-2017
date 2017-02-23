@@ -41,7 +41,7 @@ public class FileHandlerImpl implements IFileHandler {
 		}
 	}
 
-	public Model initModel() {
+	public void initModel() {
 		File file = new File(new File("live/resource/" + chosenInputFile).getAbsolutePath());
 		Scanner scanner = null;
 		try {
@@ -106,11 +106,13 @@ public class FileHandlerImpl implements IFileHandler {
 			cacheServer.setSize(X);
 
 			cacheServers[c] = cacheServer;
-			
+
 		}
 
-		Model model = new Model(requests, videoSizes, endpoints, cacheServers);
-		return model;
+		Model.cacheServers = cacheServers;
+		Model.requests = requests;
+		Model.videoSizes = videoSizes;
+		Model.endpoints = endpoints;
 	}
 
 	@Override
