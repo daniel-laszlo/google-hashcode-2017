@@ -8,7 +8,7 @@ public class Request {
 	private int requestId;
 	private int videoId;
 	private int endPointId;
-	private int requestDarab; // 1 endpoint - 1 videora
+	private int requestCount; // 1 endpoint - 1 videora
 
 	public int getVideoId() {
 		return videoId;
@@ -26,19 +26,19 @@ public class Request {
 		this.endPointId = endPointId;
 	}
 
-	public int getRequestDarab() {
-		return requestDarab;
+	public int getRequestCount() {
+		return requestCount;
 	}
 
-	public void setRequestDarab(int requestDarab) {
-		this.requestDarab = requestDarab;
+	public void setRequestCount(int requestCount) {
+		this.requestCount = requestCount;
 	}
 
-    public int getRequestId() {
-        return requestId;
-    }
+	public int getRequestId() {
+		return requestId;
+	}
 
-    public void setRequestId(int requestId) {
-        this.requestId = requestId;
-    }
+	public void setRequestId(int requestId) {
+		this.requestId = requestId;
+	}
 }

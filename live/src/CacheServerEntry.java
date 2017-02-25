@@ -13,7 +13,7 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 	private Set<Integer> requestIds;
 	private int priority = 0;
 	private int weight = 1;
-	
+
 	public CacheServerEntry() {
 		requestIds = new HashSet<>();
 	}
@@ -39,29 +39,29 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 	}
 
 	public void addRequestId(Integer id) {
-        requestIds.add(id);
-    }
-	
+		requestIds.add(id);
+	}
+
 	public int getPriority() {
 		return priority;
 	}
-	
+
 	public void updatePriority() {
-		priority = requestNumberSum / (weight * Model.videoSizes[videoId]); 
+		priority = requestNumberSum / (weight * Model.videoSizes[videoId]);
 	}
 
 	@Override
 	public int compareTo(CacheServerEntry other) {
-		if(priority < other.getPriority()) {
+		if (priority < other.getPriority()) {
 			return 1;
-		} else if(priority > other.getPriority()){
+		} else if (priority > other.getPriority()) {
 			return -1;
 		} else {
 			return 0;
 		}
 	}
 
-    public void removeRequestId(int requestId) {
-        requestIds.remove(requestId);
-    }
+	public void removeRequestId(int requestId) {
+		requestIds.remove(requestId);
+	}
 }

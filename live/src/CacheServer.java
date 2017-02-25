@@ -14,10 +14,10 @@ public class CacheServer {
 	public CacheServer() {
 		videoIds = new ArrayList<>();
 		cacheServerEntries = new CacheServerEntry[Model.videoSizes.length];
-        for (int i = 0; i < cacheServerEntries.length; i++) {
-            cacheServerEntries[i] = new CacheServerEntry();
-        }
-    }
+		for (int i = 0; i < cacheServerEntries.length; i++) {
+			cacheServerEntries[i] = new CacheServerEntry();
+		}
+	}
 
 	public int getSize() {
 		return size;
@@ -52,8 +52,7 @@ public class CacheServer {
 	public void put(Request request) {
 		int videoId = request.getVideoId();
 		cacheServerEntries[videoId].setVideoId(videoId);
-		cacheServerEntries[videoId].setRequestNumberSum(
-				cacheServerEntries[videoId].getRequestNumberSum() + request.getRequestDarab());
+		cacheServerEntries[videoId].setRequestNumberSum(cacheServerEntries[videoId].getRequestNumberSum() + request.getRequestCount());
 		cacheServerEntries[videoId].addRequestId(request.getRequestId());
 	}
 
@@ -62,24 +61,24 @@ public class CacheServer {
 	// üres tömb ha már nem bírt kivenni
 	public Integer[] pop() {
 		Arrays.sort(cacheServerEntries);
-		for(CacheServerEntry c:cacheServerEntries){
-			if(c.getRequestNumberSum() == 0) {
+		for (CacheServerEntry c : cacheServerEntries) {
+			if (c.getRequestNumberSum() == 0) {
 				return new Integer[0];
 			} else {
 				int leftSize = size;
-				for(int v:videoIds) {
-					leftSize = leftSize-Model.videoSizes[v];
+				for (int v : videoIds) {
+					leftSize = leftSize - Model.videoSizes[v];
 				}
-				if(leftSize<Model.videoSizes[c.getVideoId()]) {
+				if (leftSize < Model.videoSizes[c.getVideoId()]) {
 					c.setRequestNumberSum(0);
 				} else {
-		            videoIds.add(c.getVideoId());
+					videoIds.add(c.getVideoId());
 					c.setRequestNumberSum(0);
 					return c.getRequestIds().toArray(new Integer[c.getRequestIds().size()]);
-				}	 
-			} 
+				}
+			}
 		}
-		return new Integer[0]; 
+		return new Integer[0];
 	}
 
 	//MIKE
@@ -87,14 +86,14 @@ public class CacheServer {
 	public void remove(Request request) {
 		int videoId = request.getVideoId();
 		cacheServerEntries[videoId].setRequestNumberSum(
-				cacheServerEntries[videoId].getRequestNumberSum() - request.getRequestDarab());
+				cacheServerEntries[videoId].getRequestNumberSum() - request.getRequestCount());
 		cacheServerEntries[videoId].removeRequestId(request.getRequestId());
 		cacheServerEntries[videoId].updatePriority();
 	}
-	
+
 	public void updateAll() {
-		for(int i = 0; i < cacheServerEntries.length; ++i) {
-			cacheServerEntries[i].updatePriority(); 
+		for (int i = 0; i < cacheServerEntries.length; ++i) {
+			cacheServerEntries[i].updatePriority();
 		}
 	}
 }

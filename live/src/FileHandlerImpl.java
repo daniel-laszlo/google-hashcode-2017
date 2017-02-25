@@ -9,8 +9,7 @@ import java.util.Scanner;
 /**
  * Created by Daniel on 2017. 02. 21..
  */
-public class FileHandlerImpl implements IFileHandler {
-
+public class FileHandlerImpl {
 
 	private static final String INPUT_FILE_NAME_1 = "kittens.in";
 	private static final String INPUT_FILE_NAME_2 = "me_at_the_zoo.in";
@@ -20,7 +19,6 @@ public class FileHandlerImpl implements IFileHandler {
 	private static String chosenInputFile = "proba.in";
 	private static String chosenOutPutFile = "proba.out";
 
-	@Override
 	public void setFile(int i) {
 		if (i > 5 || i < 0) {
 			throw new IndexOutOfBoundsException();
@@ -100,7 +98,7 @@ public class FileHandlerImpl implements IFileHandler {
 
 			request.setRequestId(requestId++);
 			request.setEndPointId(Integer.parseInt(params[1]));
-			request.setRequestDarab(Integer.parseInt(params[2]));
+			request.setRequestCount(Integer.parseInt(params[2]));
 			request.setVideoId(Integer.parseInt(params[0]));
 			requests[r] = request;
 		}
@@ -125,7 +123,7 @@ public class FileHandlerImpl implements IFileHandler {
 
 		List<Integer> activeServerIds = Model.getActiveCacheServers();
 		StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(activeServerIds.size() + "\n");
+		stringBuilder.append(activeServerIds.size() + "\n");
 		for (int i = 0; i < activeServerIds.size(); i++) {
 			CacheServer cacheServerToBePrinted = Model.cacheServers[activeServerIds.get(i)];
 			stringBuilder.append(activeServerIds.get(i) + " ");
