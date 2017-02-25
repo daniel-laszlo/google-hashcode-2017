@@ -9,7 +9,7 @@ import java.util.Set;
 public class CacheServerEntry implements Comparable<CacheServerEntry> {
 
 	private int videoId;
-	private int requestNumberSum;
+	private int requestCountSum;
 	private Set<Integer> requestIds;
 	private int priority = 0;
 	private int weight = 1;
@@ -26,12 +26,16 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 		this.videoId = videoId;
 	}
 
-	public int getRequestNumberSum() {
-		return requestNumberSum;
+	public int getRequestCountSum() {
+		return requestCountSum;
 	}
 
-	public void setRequestNumberSum(int requestNumberSum) {
-		this.requestNumberSum = requestNumberSum;
+	public void setRequestCountSum(int requestCountSum) {
+		this.requestCountSum = requestCountSum;
+	}
+
+	public void increaseRequestCountSum(int increment) {
+		this.requestCountSum = this.requestCountSum + increment;
 	}
 
 	public List<Integer> getRequestIds() {
@@ -47,7 +51,7 @@ public class CacheServerEntry implements Comparable<CacheServerEntry> {
 	}
 
 	public void updatePriority() {
-		priority = requestNumberSum / (weight * Model.videoSizes[videoId]);
+		priority = requestCountSum / (weight * Model.videoSizes[videoId]);
 	}
 
 	@Override

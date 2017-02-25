@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -8,61 +8,49 @@ import java.util.List;
 public class CacheServer {
 
 	private int size;
-	private CacheServerEntry[] cacheServerEntries;
+	private List<CacheServerEntry> cacheServerEntries;
 	private List<Integer> videoIds;
 
 	public CacheServer() {
 		videoIds = new ArrayList<>();
-		cacheServerEntries = new CacheServerEntry[Model.videoSizes.length];
-		for (int i = 0; i < cacheServerEntries.length; i++) {
-			cacheServerEntries[i] = new CacheServerEntry();
-		}
-	}
-
-	public int getSize() {
-		return size;
+		cacheServerEntries = new ArrayList<>();
+//				new CacheServerEntry[Model.videoSizes.length];
+//		for (int i = 0; i < cacheServerEntries.length; i++) {
+//			cacheServerEntries[i] = new CacheServerEntry();
+//		}
 	}
 
 	public void setSize(int size) {
 		this.size = size;
 	}
 
-	public CacheServerEntry[] getCacheServerEntries() {
-		return cacheServerEntries;
-	}
-
-	public void setCacheServerEntries(CacheServerEntry[] cacheServerEntries) {
-		this.cacheServerEntries = cacheServerEntries;
-	}
-
 	public List<Integer> getVideoIds() {
 		return videoIds;
-	}
-
-	public void setVideoIds(List<Integer> videoIds) {
-		this.videoIds = videoIds;
 	}
 
 	//
 	// FUNCTIONS
 	//
 
-	// MIKE
-	// Végigmegy a request tömbön, csak a legelején
 	public void put(Request request) {
 		int videoId = request.getVideoId();
-		cacheServerEntries[videoId].setVideoId(videoId);
-		cacheServerEntries[videoId].setRequestNumberSum(cacheServerEntries[videoId].getRequestNumberSum() + request.getRequestCount());
-		cacheServerEntries[videoId].addRequestId(request.getRequestId());
+		CacheServerEntry entry = getEntryByVideoId(videoId);
+		if (entry != null) {
+			entry.increaseRequestCountSum(request.getRequestCount());
+			entry.addRequestId(request.getRequestId());
+			return;
+		}
+		CacheServerEntry newEntry = new CacheServerEntry();
+		newEntry.increaseRequestCountSum(request.getRequestCount());
+		newEntry.addRequestId(request.getRequestId());
+		newEntry.setVideoId(videoId);
+		cacheServerEntries.add(newEntry);
 	}
 
-	// MARK
-	// sorba teszi a cache tömböt. Amelyik a legjobb annak az requestIdját adja vissza
-	// üres tömb ha már nem bírt kivenni
 	public Integer[] pop() {
-		Arrays.sort(cacheServerEntries);
+		Collections.sort(cacheServerEntries);
 		for (CacheServerEntry entry : cacheServerEntries) {
-			if (entry.getRequestNumberSum() == 0) {
+			if (entry.getRequestCountSum() == 0) {
 				return new Integer[0];
 			} else {
 				int leftSize = size;
@@ -70,10 +58,10 @@ public class CacheServer {
 					leftSize = leftSize - Model.videoSizes[v];
 				}
 				if (leftSize < Model.videoSizes[entry.getVideoId()]) {
-					entry.setRequestNumberSum(0);
+					entry.setRequestCountSum(0);
 				} else {
 					videoIds.add(entry.getVideoId());
-					entry.setRequestNumberSum(0);
+					entry.setRequestCountSum(0);
 					return entry.getRequestIds().toArray(new Integer[entry.getRequestIds().size()]);
 				}
 			}
@@ -81,18 +69,29 @@ public class CacheServer {
 		return new Integer[0];
 	}
 
-	//MIKE
-	// request számát kiveszi és törli a megfelelő elemet a tömbből
 	public void remove(Request request) {
 		int videoId = request.getVideoId();
-		cacheServerEntries[videoId].setRequestNumberSum(cacheServerEntries[videoId].getRequestNumberSum() - request.getRequestCount());
-		cacheServerEntries[videoId].removeRequestId(request.getRequestId());
-		cacheServerEntries[videoId].updatePriority();
+		CacheServerEntry entry = getEntryByVideoId(videoId);
+		if (entry != null) {
+			entry.increaseRequestCountSum((-1) * request.getRequestCount());
+			entry.removeRequestId(request.getRequestId());
+			entry.updatePriority();
+		}
+		//throw new NullPointerException();
 	}
 
 	public void updateAll() {
-		for (int i = 0; i < cacheServerEntries.length; ++i) {
-			cacheServerEntries[i].updatePriority();
+		for (CacheServerEntry cacheServerEntry : cacheServerEntries) {
+			cacheServerEntry.updatePriority();
 		}
+	}
+
+	private CacheServerEntry getEntryByVideoId(int videoId) {
+		for (CacheServerEntry cacheServerEntry : cacheServerEntries) {
+			if (cacheServerEntry.getVideoId() == videoId) {
+				return cacheServerEntry;
+			}
+		}
+		return null;
 	}
 }
