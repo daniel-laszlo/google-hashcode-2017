@@ -57,24 +57,24 @@ public class CacheServer {
 	}
 
 	// MARK
-	// sorba teszi a cache tömböt. Amelyik a legjobb annak az R.idjét adja vissza
+	// sorba teszi a cache tömböt. Amelyik a legjobb annak az requestIdját adja vissza
 	// üres tömb ha már nem bírt kivenni
 	public Integer[] pop() {
 		Arrays.sort(cacheServerEntries);
-		for (CacheServerEntry c : cacheServerEntries) {
-			if (c.getRequestNumberSum() == 0) {
+		for (CacheServerEntry entry : cacheServerEntries) {
+			if (entry.getRequestNumberSum() == 0) {
 				return new Integer[0];
 			} else {
 				int leftSize = size;
 				for (int v : videoIds) {
 					leftSize = leftSize - Model.videoSizes[v];
 				}
-				if (leftSize < Model.videoSizes[c.getVideoId()]) {
-					c.setRequestNumberSum(0);
+				if (leftSize < Model.videoSizes[entry.getVideoId()]) {
+					entry.setRequestNumberSum(0);
 				} else {
-					videoIds.add(c.getVideoId());
-					c.setRequestNumberSum(0);
-					return c.getRequestIds().toArray(new Integer[c.getRequestIds().size()]);
+					videoIds.add(entry.getVideoId());
+					entry.setRequestNumberSum(0);
+					return entry.getRequestIds().toArray(new Integer[entry.getRequestIds().size()]);
 				}
 			}
 		}
@@ -85,8 +85,7 @@ public class CacheServer {
 	// request számát kiveszi és törli a megfelelő elemet a tömbből
 	public void remove(Request request) {
 		int videoId = request.getVideoId();
-		cacheServerEntries[videoId].setRequestNumberSum(
-				cacheServerEntries[videoId].getRequestNumberSum() - request.getRequestCount());
+		cacheServerEntries[videoId].setRequestNumberSum(cacheServerEntries[videoId].getRequestNumberSum() - request.getRequestCount());
 		cacheServerEntries[videoId].removeRequestId(request.getRequestId());
 		cacheServerEntries[videoId].updatePriority();
 	}
