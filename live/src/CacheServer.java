@@ -8,20 +8,18 @@ import java.util.List;
 public class CacheServer {
 
 	private int size;
+	private int remainingSize;
 	private List<CacheServerEntry> cacheServerEntries;
 	private List<Integer> videoIds;
 
 	public CacheServer() {
 		videoIds = new ArrayList<>();
 		cacheServerEntries = new ArrayList<>();
-//				new CacheServerEntry[Model.videoSizes.length];
-//		for (int i = 0; i < cacheServerEntries.length; i++) {
-//			cacheServerEntries[i] = new CacheServerEntry();
-//		}
 	}
 
 	public void setSize(int size) {
 		this.size = size;
+		this.remainingSize = size;
 	}
 
 	public List<Integer> getVideoIds() {
@@ -53,13 +51,10 @@ public class CacheServer {
 			if (entry.getRequestCountSum() == 0) {
 				return new Integer[0];
 			} else {
-				int leftSize = size;
-				for (int v : videoIds) {
-					leftSize = leftSize - Model.videoSizes[v];
-				}
-				if (leftSize < Model.videoSizes[entry.getVideoId()]) {
+				if (remainingSize < Model.videoSizes[entry.getVideoId()]) {
 					entry.setRequestCountSum(0);
 				} else {
+					remainingSize -= Model.videoSizes[entry.getVideoId()];
 					videoIds.add(entry.getVideoId());
 					entry.setRequestCountSum(0);
 					return entry.getRequestIds().toArray(new Integer[entry.getRequestIds().size()]);
